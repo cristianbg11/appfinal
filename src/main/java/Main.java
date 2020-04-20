@@ -19,8 +19,9 @@ import static spark.Spark.*;
 public class Main {
 
     public static void main(final String[] args) throws Exception {
-        Kmeans kmeans = new Kmeans();
+
         //kmeans.inicializar(10, 5);
+        //kmeans.centroides();
         //System.out.println(System.getProperty("user.dir"));
         staticFiles.location("/publico");
         port(getHerokuAssignedPort());
@@ -31,12 +32,24 @@ public class Main {
         });
 
         get("/table", (request, response)-> {
-            ArrayList<Instancia> instancias = new ArrayList<>();
+            int clust = 0;
+            if (request.queryParams("cluster")==null){
+                clust = 5;
+            } else {
+                clust = Integer.parseInt(request.queryParams("cluster"));
+            }
+            Kmeans kmeans = new Kmeans(10, clust);
+            ArrayList<Instancia> instancias;
+            ArrayList<Instancia> centroides;
             Map<String, Object> attributes = new HashMap<>();
             //int id = Integer.parseInt(request.queryParams("id"));
             //Estudiante est = (Estudiante) estudiantes.get(id);
-            instancias = kmeans.inicializar(10, 5);
+            instancias = kmeans.clusterar();
+            centroides = kmeans.centroides();
+
             attributes.put("instancias", instancias);
+            attributes.put("centroides", centroides);
+            attributes.put("clust", clust);
             return new ModelAndView(attributes, "table.ftl");
 
         } , new FreeMarkerEngine());

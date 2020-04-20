@@ -5,6 +5,11 @@ public class Instancia {
     public double Longitud;
     public String Provinvia;
     public int Cluster;
+    public String Region;
+    public String North;
+    public String South;
+    public String East;
+    public String West;
 
     public Instancia(int dia, int casos, double latitud, double longitud, String provinvia, int cluster) {
         Dia = dia;
@@ -65,5 +70,45 @@ public class Instancia {
 
     public void setCluster(int cluster) {
         Cluster = cluster;
+    }
+
+    public String getRegion() {
+        return Region;
+    }
+
+    public void setRegion(String region) {
+        Region = region;
+    }
+
+    public String getNorth() {
+        return North;
+    }
+
+    public void setNorth(String north) {
+        North = north;
+    }
+
+    public String getSouth() {
+        return South;
+    }
+
+    public void setSouth(String south) {
+        South = south;
+    }
+
+    public String getEast() {
+        return East;
+    }
+
+    public void setEast(String east) {
+        East = east;
+    }
+
+    public String getWest() {
+        return West;
+    }
+
+    public void setWest(String west) {
+        West = west;
     }
 }
