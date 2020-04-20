@@ -306,7 +306,7 @@
             ['Provinces', 'Ciudad',  'Cantidad', 'Dia'],
             <#if centroides?has_content>
                 <#list centroides as inst>
-                    ['${inst.region}',  '${inst.region}-${inst.provinvia}',    ${inst.casos},    ${inst.dia}],
+                    ['${inst.region}',  '${inst.region} - ${inst.provinvia}',    ${inst.casos},    ${inst.dia}],
                 </#list>
             </#if>
 
@@ -315,7 +315,7 @@
         var options = {
             region: 'IT',
             resolution:'provinces',
-            colorAxis: {colors: ['green', 'blue']}
+            colorAxis: {colors: ['yellow', 'green']}
         };
 
         var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
