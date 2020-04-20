@@ -1,4 +1,6 @@
+import spark.ModelAndView;
 import spark.Session;
+import spark.template.freemarker.FreeMarkerEngine;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -7,13 +9,19 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static spark.Spark.*;
 
 public class Main {
 
     public static void main(final String[] args) throws Exception {
+        Kmeans kmeans = new Kmeans();
+        //kmeans.inicializar(10, 5);
+        //System.out.println(System.getProperty("user.dir"));
         staticFiles.location("/publico");
         port(getHerokuAssignedPort());
 
@@ -21,6 +29,17 @@ public class Main {
             //response.redirect("/login.html");
             return renderContent("publico/index.html");
         });
+
+        get("/table", (request, response)-> {
+            ArrayList<Instancia> instancias = new ArrayList<>();
+            Map<String, Object> attributes = new HashMap<>();
+            //int id = Integer.parseInt(request.queryParams("id"));
+            //Estudiante est = (Estudiante) estudiantes.get(id);
+            instancias = kmeans.inicializar(10, 5);
+            attributes.put("instancias", instancias);
+            return new ModelAndView(attributes, "table.ftl");
+
+        } , new FreeMarkerEngine());
     }
 
     public static int getHerokuAssignedPort() {

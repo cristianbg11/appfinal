@@ -50,4 +50,8 @@ dependencies {
     //compile 'org.webjars:bootstrap:3.3.6', //existe un bug que no permite varias rutas, están metiendo mano.
     compile "org.slf4j:slf4j-simple:1.7.21"
     compile group: 'org.jsoup', name: 'jsoup', version: '1.11.3'
+
+    compile group: 'nz.ac.waikato.cms.weka', name: 'weka-dev', version: '3.7.12'
+
+
 }
